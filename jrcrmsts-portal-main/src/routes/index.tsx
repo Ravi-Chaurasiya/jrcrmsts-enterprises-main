@@ -23,7 +23,10 @@ export const Route = createFileRoute("/")({
         content:
           "JRCRMSTS Enterprises & Project Management Consultant — architecture, interiors, structures, town planning, construction and project costing. Offices in Bahadurgarh & Hisar, Haryana.",
       },
-      { property: "og:title", content: "JRCRMSTS Enterprises — Architecture & Project Management Consultants" },
+      {
+        property: "og:title",
+        content: "JRCRMSTS Enterprises — Architecture & Project Management Consultants",
+      },
       {
         property: "og:description",
         content:
@@ -46,12 +49,14 @@ const services = [
   {
     icon: Building2,
     title: "Interiors",
-    description: "Designing and detailing interiors of the given spaces, tailored to how you live and work.",
+    description:
+      "Designing and detailing interiors of the given spaces, tailored to how you live and work.",
   },
   {
     icon: Landmark,
     title: "Structures",
-    description: "Structural design and detailing of designed buildings, engineered for safety and longevity.",
+    description:
+      "Structural design and detailing of designed buildings, engineered for safety and longevity.",
   },
   {
     icon: Map,
@@ -61,12 +66,14 @@ const services = [
   {
     icon: HardHat,
     title: "Construction",
-    description: "End-to-end execution and on-site supervision for residential, commercial, industrial and institutional buildings.",
+    description:
+      "End-to-end execution and on-site supervision for residential, commercial, industrial and institutional buildings.",
   },
   {
     icon: Calculator,
     title: "Project Estimate & Costing",
-    description: "Transparent project estimates and costing so every rupee is accounted for before work begins.",
+    description:
+      "Transparent project estimates and costing so every rupee is accounted for before work begins.",
   },
 ];
 
@@ -78,13 +85,26 @@ function Index() {
       {/* Nav */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="font-display text-lg font-semibold tracking-wide">
-            JRCRMSTS <span className="text-primary">Enterprises</span>
+          <a href="#top" className="inline-flex items-center gap-2">
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border border-primary/70 bg-gradient-to-br from-primary/25 via-background/70 to-violet-950/50 p-1.5 shadow-[0_0_18px_rgba(219,169,83,0.32)]">
+              <img
+                src="/brand-mark.png"
+                alt=""
+                className="h-11 w-12 object-contain brightness-150 drop-shadow-[0_0_5px_rgba(255,220,150,0.45)]"
+              />
+            </span>
+            <span className="font-display text-base font-bold leading-tight tracking-normal sm:text-xl">
+              <span className="block sm:inline">JRCRMSTS</span>{" "}
+              <span className="text-primary">Enterprises</span>
+            </span>
           </a>
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-            <a href="#services" className="transition-colors hover:text-foreground">What we do</a>
-            <a href="#about" className="transition-colors hover:text-foreground">Who we are</a>
-            <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
+            <a href="#services" className="transition-colors hover:text-foreground">
+              Services
+            </a>
+            <a href="#about" className="transition-colors hover:text-foreground">
+              About Us
+            </a>
           </nav>
           <a
             href="#contact"
@@ -99,7 +119,6 @@ function Index() {
       <section id="top" className="relative flex min-h-screen items-end">
         <video
           className="absolute inset-0 h-full w-full object-cover"
-          src="/hero-video.mp4"
           poster={heroPoster}
           autoPlay
           muted
@@ -108,7 +127,9 @@ function Index() {
           preload="auto"
           aria-hidden="true"
           tabIndex={-1}
-        />
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/30 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-16 pt-32 sm:pb-24 sm:pt-40">
@@ -141,7 +162,7 @@ function Index() {
 
       {/* Services */}
       <section id="services" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-        <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">What we do</p>
+        <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">Services</p>
         <h2 className="mt-4 max-w-2xl font-display text-4xl font-semibold text-balance md:text-5xl">
           Complete design &amp; build services under one roof
         </h2>
@@ -165,7 +186,9 @@ function Index() {
       <section id="about" className="border-y border-border bg-card">
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-2 md:py-32">
           <div>
-            <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">Who we are</p>
+            <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">
+              About Us
+            </p>
             <h2 className="mt-4 font-display text-4xl font-semibold text-balance md:text-5xl">
               Technical excellence, honest hard work
             </h2>
@@ -212,7 +235,6 @@ function Index() {
 
       {/* Contact */}
       <section id="contact" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-        <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">What we are</p>
         <h2 className="mt-4 max-w-2xl font-display text-4xl font-semibold text-balance md:text-5xl">
           Let's talk about your project
         </h2>
