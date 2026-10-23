@@ -225,16 +225,16 @@ function Index() {
       {/* Nav */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="inline-flex items-center gap-2">
-            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border border-primary/70 bg-gradient-to-br from-primary/25 via-background/70 to-violet-950/50 p-1.5 shadow-[0_0_18px_rgba(219,169,83,0.32)]">
+          <a href="#top" className="inline-flex items-center gap-1.5 sm:gap-2">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-primary/70 bg-gradient-to-br from-primary/25 via-background/70 to-violet-950/50 p-1.5 shadow-[0_0_18px_rgba(219,169,83,0.32)] sm:h-14 sm:w-14">
               <img
                 src="/brand-mark.png"
                 alt=""
-                className="h-11 w-12 object-contain brightness-150 drop-shadow-[0_0_5px_rgba(255,220,150,0.45)]"
+                className="h-9 w-10 object-contain brightness-150 drop-shadow-[0_0_5px_rgba(255,220,150,0.45)] sm:h-11 sm:w-12"
               />
             </span>
             <span className="flex flex-col font-display font-bold leading-tight tracking-normal">
-              <span className="text-base sm:text-xl">
+              <span className="text-sm sm:text-xl">
                 <span className="text-xs font-medium sm:text-sm">M/s </span>
                 <span>JRCRMSTS</span> <span className="text-primary">Enterprises</span>
               </span>
@@ -259,7 +259,7 @@ function Index() {
           </nav>
           <a
             href="#call-us"
-            className="rounded-sm bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+            className="shrink-0 whitespace-nowrap rounded-sm bg-primary px-2.5 py-2 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90 sm:px-4 sm:text-sm"
           >
             Get in touch
           </a>
@@ -421,7 +421,7 @@ function Index() {
                 setActiveGallery((current) => (current === category.slug ? null : category.slug))
               }
               aria-expanded={activeGallery === category.slug}
-              className={`group relative flex w-[78%] shrink-0 snap-center flex-col items-start justify-between overflow-hidden rounded-md border p-5 text-left transition-all sm:w-[45%] md:w-auto ${
+              className={`group relative flex min-h-52 w-[78%] shrink-0 snap-center flex-col items-start justify-between overflow-hidden rounded-md border p-5 text-left transition-all sm:w-[45%] md:min-h-56 md:w-auto lg:min-h-64 ${
                 activeGallery === category.slug
                   ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(219,169,83,0.12)]"
                   : "border-border bg-card hover:border-primary/50 hover:bg-secondary"
@@ -565,6 +565,9 @@ function Index() {
               </div>
             ))}
           </div>
+          <p className="mt-6 text-center font-display text-sm text-muted-foreground sm:text-base">
+            And many more organizations have trusted us with their projects.
+          </p>
         </div>
       </section>
 
