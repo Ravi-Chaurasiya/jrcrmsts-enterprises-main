@@ -88,27 +88,99 @@ const galleryCategories = [
     slug: "commercial",
     title: "Commercial",
     icon: Building2,
+    image: "IMG-20261017-WA0009.jpg",
   },
   {
     slug: "residential",
     title: "Residential",
     icon: House,
+    image: "IMG-20261019-WA0003.jpg",
   },
   {
     slug: "institutional",
     title: "Institutional",
     icon: Landmark,
+    image: "IMG-20261019-WA0012.jpg",
   },
   {
     slug: "industrial",
     title: "Industrial",
     icon: Factory,
+    image: "IMG-20261019-WA0026.jpg",
   },
   {
     slug: "design-drafting",
     title: "Design & Drafting",
     icon: DraftingCompass,
+    image: "IMG-20261013-WA0006.jpg",
   },
+];
+
+const designDraftingPhotos = [
+  "IMG-20261013-WA0004.jpg",
+  "IMG-20261013-WA0005.jpg",
+  "IMG-20261013-WA0006.jpg",
+  "IMG-20261013-WA0007.jpg",
+  "IMG-20261013-WA0008.jpg",
+  "IMG-20261017-WA0008.jpg",
+  "IMG-20261017-WA0010.jpg",
+  "IMG-20261017-WA0012.jpg",
+  "IMG-20261017-WA0018.jpg",
+  "IMG-20261017-WA0021.jpg",
+  "IMG-20261017-WA0025.jpg",
+];
+
+const institutionalPhotos = [
+  "IMG-20261017-WA0023.jpg",
+  "IMG-20261019-WA0001.jpg",
+  "IMG-20261019-WA0012.jpg",
+  "IMG-20261019-WA0017.jpg",
+  "IMG-20261019-WA0019.jpg",
+  "IMG-20261019-WA0020.jpg",
+  "IMG-20261019-WA0023.jpg",
+  "IMG-20261019-WA0024.jpg",
+  "IMG-20261019-WA0027.jpg",
+  "IMG-20261019-WA0029.jpg",
+  "IMG-20261019-WA0030.jpg",
+  "institutional-additional.jpg",
+];
+
+const residentialPhotos = [
+  "IMG-20261019-WA0000.jpg",
+  "IMG-20261019-WA0002.jpg",
+  "IMG-20261019-WA0003.jpg",
+  "IMG-20261019-WA0004.jpg",
+  "IMG-20261019-WA0005.jpg",
+  "IMG-20261019-WA0006.jpg",
+  "IMG-20261019-WA0007.jpg",
+  "IMG-20261019-WA0008.jpg",
+  "IMG-20261019-WA0010.jpg",
+  "IMG-20261019-WA0011.jpg",
+  "IMG-20261019-WA0021.jpg",
+  "IMG-20261019-WA0022.jpg",
+  "IMG-20261019-WA0025.jpg",
+];
+
+const commercialPhotos = [
+  "IMG-20261017-WA0009.jpg",
+  "IMG-20261019-WA0033.jpg",
+  "IMG-20261017-WA0011.jpg",
+  "IMG-20261017-WA0013.jpg",
+  "IMG-20261017-WA0027.jpg",
+  "IMG-20261017-WA0028.jpg",
+  "IMG-20261017-WA0031.jpg",
+  "IMG-20261019-WA0014.jpg",
+  "IMG-20261019-WA0015.jpg",
+  "IMG-20261019-WA0016.jpg",
+  "IMG-20261019-WA0028.jpg",
+];
+
+const industrialPhotos = [
+  "IMG-20261019-WA0026.jpg",
+  "IMG-20261018-WA0005.jpg",
+  "IMG-20261018-WA0006.jpg",
+  "IMG-20261018-WA0008.jpg",
+  "IMG-20261018-WA0009.jpg",
 ];
 
 const sectors = galleryCategories;
@@ -136,6 +208,8 @@ const offices = [
 function Index() {
   const [activeGallery, setActiveGallery] = useState<string | null>(null);
   const galleryTrack = useRef<HTMLDivElement>(null);
+  const contactCardClass =
+    "group rounded-md border border-border bg-card p-8 transition-colors duration-300 hover:border-primary/60 hover:bg-secondary";
 
   const scrollGallery = (direction: -1 | 1) => {
     galleryTrack.current?.scrollBy({
@@ -182,7 +256,7 @@ function Index() {
             </a>
           </nav>
           <a
-            href="#contact"
+            href="#call-us"
             className="rounded-sm bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
           >
             Get in touch
@@ -345,17 +419,40 @@ function Index() {
                 setActiveGallery((current) => (current === category.slug ? null : category.slug))
               }
               aria-expanded={activeGallery === category.slug}
-              className={`group flex w-[78%] shrink-0 snap-center flex-col items-start justify-between rounded-md border p-5 text-left transition-all sm:w-[45%] md:w-auto ${
+              className={`group relative flex w-[78%] shrink-0 snap-center flex-col items-start justify-between overflow-hidden rounded-md border p-5 text-left transition-all sm:w-[45%] md:w-auto ${
                 activeGallery === category.slug
                   ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(219,169,83,0.12)]"
                   : "border-border bg-card hover:border-primary/50 hover:bg-secondary"
               }`}
             >
-              <category.icon className="h-8 w-8 text-primary" strokeWidth={1.5} />
-              <span className="mt-8 font-display text-lg font-semibold">{category.title}</span>
-              <span className="mt-2 text-xs text-muted-foreground">
-                {activeGallery === category.slug ? "Viewing projects" : "View projects"}
-              </span>
+              {category.image ? (
+                <>
+                  <img
+                    src={`/gallery/${category.image}`}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10"
+                  />
+                  <span className="relative mt-auto font-display text-lg font-semibold text-white drop-shadow-md">
+                    {category.title}
+                  </span>
+                  <span className="relative mt-2 text-xs text-white/85">
+                    {activeGallery === category.slug ? "Viewing projects" : "View projects"}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <category.icon className="h-8 w-8 text-primary" strokeWidth={1.5} />
+                  <span className="mt-8 font-display text-lg font-semibold">{category.title}</span>
+                  <span className="mt-2 text-xs text-muted-foreground">
+                    {activeGallery === category.slug ? "Viewing projects" : "View projects"}
+                  </span>
+                </>
+              )}
             </button>
           ))}
         </div>
@@ -367,28 +464,83 @@ function Index() {
             <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">
               {galleryCategories.find((category) => category.slug === activeGallery)?.title}
             </p>
-            <h3 className="mt-3 font-display text-2xl font-semibold">Project photos coming soon</h3>
-            <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-              Photos for this project category will appear here. The gallery is ready for your
-              images.
-            </p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-3">
-              {["Project overview", "Design details", "Completed work"].map((label) => (
-                <div
-                  key={label}
-                  className="grid aspect-[4/3] place-items-center rounded-md border border-border/80 bg-background/50 p-4 text-center"
-                >
-                  <div>
-                    <DraftingCompass
-                      className="mx-auto h-8 w-8 text-primary/70"
-                      strokeWidth={1.5}
-                    />
-                    <p className="mt-3 text-sm font-medium text-muted-foreground">{label}</p>
-                    <p className="mt-1 text-xs text-muted-foreground/70">Image will be added</p>
-                  </div>
+            {activeGallery === "design-drafting" ||
+            activeGallery === "institutional" ||
+            activeGallery === "residential" ||
+            activeGallery === "commercial" ||
+            activeGallery === "industrial" ? (
+              <>
+                <h3 className="mt-3 font-display text-2xl font-semibold">
+                  {activeGallery === "design-drafting"
+                    ? "Design & Drafting projects"
+                    : `${activeGallery === "institutional" ? "Institutional" : activeGallery === "residential" ? "Residential" : activeGallery === "commercial" ? "Commercial" : "Industrial"} projects`}
+                </h3>
+                <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                  Browse our{" "}
+                  {activeGallery === "design-drafting"
+                    ? "design and drafting"
+                    : activeGallery === "institutional"
+                      ? "institutional"
+                      : activeGallery === "residential"
+                        ? "residential"
+                        : activeGallery === "commercial"
+                          ? "commercial"
+                          : "industrial"}{" "}
+                  project photos.
+                </p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {(activeGallery === "design-drafting"
+                    ? designDraftingPhotos
+                    : activeGallery === "institutional"
+                      ? institutionalPhotos
+                      : activeGallery === "residential"
+                        ? residentialPhotos
+                        : activeGallery === "commercial"
+                          ? commercialPhotos
+                          : industrialPhotos
+                  ).map((photo, index) => (
+                    <figure
+                      key={photo}
+                      className="overflow-hidden rounded-md border border-border/80 bg-background/50 transition-all duration-300 hover:-translate-y-1 hover:border-primary/70 hover:shadow-[0_8px_30px_rgba(219,169,83,0.18)]"
+                    >
+                      <img
+                        src={`/gallery/${photo}`}
+                        alt={`${activeGallery === "design-drafting" ? "Design & Drafting" : activeGallery === "institutional" ? "Institutional" : activeGallery === "residential" ? "Residential" : activeGallery === "commercial" ? "Commercial" : "Industrial"} project ${index + 1}`}
+                        loading="lazy"
+                        className="aspect-[4/3] w-full bg-background object-contain"
+                      />
+                    </figure>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            ) : (
+              <>
+                <h3 className="mt-3 font-display text-2xl font-semibold">
+                  Project photos coming soon
+                </h3>
+                <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                  Photos for this project category will appear here. The gallery is ready for your
+                  images.
+                </p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                  {["Project overview", "Design details", "Completed work"].map((label) => (
+                    <div
+                      key={label}
+                      className="grid aspect-[4/3] place-items-center rounded-md border border-border/80 bg-background/50 p-4 text-center"
+                    >
+                      <div>
+                        <DraftingCompass
+                          className="mx-auto h-8 w-8 text-primary/70"
+                          strokeWidth={1.5}
+                        />
+                        <p className="mt-3 text-sm font-medium text-muted-foreground">{label}</p>
+                        <p className="mt-1 text-xs text-muted-foreground/70">Image will be added</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         )}
       </section>
@@ -424,9 +576,14 @@ function Index() {
             const mapQuery = encodeURIComponent(office.address.join(" "));
 
             return (
-              <div key={office.title} className="h-64 rounded-md border border-border bg-card p-8">
-                <MapPin className="h-6 w-6 text-primary" strokeWidth={1.5} />
-                <h3 className="mt-4 font-display text-lg font-semibold">{office.title}</h3>
+              <div key={office.title} className={`${contactCardClass} h-64`}>
+                <MapPin
+                  className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-110"
+                  strokeWidth={1.5}
+                />
+                <h3 className="mt-4 font-display text-lg font-semibold transition-colors duration-300 group-hover:text-primary">
+                  {office.title}
+                </h3>
                 <div className="mt-2 flex items-center justify-between gap-4">
                   <p className="min-w-0 flex-1 text-sm leading-relaxed text-muted-foreground">
                     {office.address.map((line, index) => (
@@ -457,20 +614,24 @@ function Index() {
               </div>
             );
           })}
-          <a
-            href="tel:+919416779890"
-            className="rounded-md border border-border bg-card p-8 transition-colors hover:bg-secondary"
-          >
-            <Phone className="h-6 w-6 text-primary" strokeWidth={1.5} />
-            <h3 className="mt-4 font-display text-lg font-semibold">Call us</h3>
+          <a id="call-us" href="tel:+919416779890" className={`${contactCardClass} scroll-mt-28`}>
+            <Phone
+              className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-110"
+              strokeWidth={1.5}
+            />
+            <h3 className="mt-4 font-display text-lg font-semibold transition-colors duration-300 group-hover:text-primary">
+              Call us
+            </h3>
             <p className="mt-2 text-sm text-muted-foreground">94167-79890 · 96714-42711</p>
           </a>
-          <a
-            href="mailto:jrcrmstsenterprises@gmail.com"
-            className="rounded-md border border-border bg-card p-8 transition-colors hover:bg-secondary"
-          >
-            <Mail className="h-6 w-6 text-primary" strokeWidth={1.5} />
-            <h3 className="mt-4 font-display text-lg font-semibold">Email us</h3>
+          <a href="mailto:jrcrmstsenterprises@gmail.com" className={contactCardClass}>
+            <Mail
+              className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-110"
+              strokeWidth={1.5}
+            />
+            <h3 className="mt-4 font-display text-lg font-semibold transition-colors duration-300 group-hover:text-primary">
+              Email us
+            </h3>
             <p className="mt-2 break-all text-sm text-muted-foreground">
               jrcrmstsenterprises@gmail.com
             </p>
