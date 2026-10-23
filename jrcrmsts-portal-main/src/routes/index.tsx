@@ -143,6 +143,7 @@ const institutionalPhotos = [
   "IMG-20261019-WA0029.jpg",
   "IMG-20261019-WA0030.jpg",
   "institutional-additional.jpg",
+  "institutional-whatsapp-2026-10-23-233951.jpeg",
 ];
 
 const residentialPhotos = [
@@ -159,6 +160,7 @@ const residentialPhotos = [
   "IMG-20261019-WA0021.jpg",
   "IMG-20261019-WA0022.jpg",
   "IMG-20261019-WA0025.jpg",
+  "residential-whatsapp-2026-10-23-233908.jpeg",
 ];
 
 const commercialPhotos = [
