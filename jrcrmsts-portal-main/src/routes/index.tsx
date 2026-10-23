@@ -1,7 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
+  ChevronLeft,
+  ChevronRight,
   Building2,
   DraftingCompass,
+  Factory,
+  House,
   Landmark,
   Map,
   HardHat,
@@ -11,21 +15,23 @@ import {
   MapPin,
   ArrowRight,
 } from "lucide-react";
+import { useRef, useState } from "react";
 import heroPoster from "@/assets/hero.jpg";
 import studioImg from "@/assets/studio.jpg";
+
+const firmName = "M/s JRCRMSTS Enterprises & Project Management Consultant";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "JRCRMSTS Enterprises — Architecture & Project Management Consultants" },
+      { title: `${firmName} — Architecture & Project Management Consultants` },
       {
         name: "description",
-        content:
-          "JRCRMSTS Enterprises & Project Management Consultant — architecture, interiors, structures, town planning, construction and project costing. Offices in Bahadurgarh & Hisar, Haryana.",
+        content: `${firmName} — architecture, interiors, structures, town planning, construction and project costing. Offices in Bahadurgarh & Hisar, Haryana.`,
       },
       {
         property: "og:title",
-        content: "JRCRMSTS Enterprises — Architecture & Project Management Consultants",
+        content: `${firmName} — Architecture & Project Management Consultants`,
       },
       {
         property: "og:description",
@@ -77,9 +83,67 @@ const services = [
   },
 ];
 
-const sectors = ["Residential", "Commercial", "Industrial", "Institutional"];
+const galleryCategories = [
+  {
+    slug: "commercial",
+    title: "Commercial",
+    icon: Building2,
+  },
+  {
+    slug: "residential",
+    title: "Residential",
+    icon: House,
+  },
+  {
+    slug: "institutional",
+    title: "Institutional",
+    icon: Landmark,
+  },
+  {
+    slug: "industrial",
+    title: "Industrial",
+    icon: Factory,
+  },
+  {
+    slug: "design-drafting",
+    title: "Design & Drafting",
+    icon: DraftingCompass,
+  },
+];
+
+const sectors = galleryCategories;
+
+const clients = [
+  "AIIMS",
+  "IOCL",
+  "Royal Enfield",
+  "Bhiwani Medical College",
+  "Malbue Towne Farm House",
+  "XLRI Delhi NCR Campus",
+];
+
+const offices = [
+  {
+    title: "Head Office — Hisar",
+    address: ["97A, Block-J, Model Town Extension,", "Hisar, Haryana — 125005, India"],
+  },
+  {
+    title: "Branch Office — Bahadurgarh",
+    address: ["23A, Sector-7 Market, Bahadurgarh,", "Distt. Jhajjar, Haryana — 124507"],
+  },
+];
 
 function Index() {
+  const [activeGallery, setActiveGallery] = useState<string | null>(null);
+  const galleryTrack = useRef<HTMLDivElement>(null);
+
+  const scrollGallery = (direction: -1 | 1) => {
+    galleryTrack.current?.scrollBy({
+      left: direction * galleryTrack.current.clientWidth * 0.8,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Nav */}
@@ -93,9 +157,14 @@ function Index() {
                 className="h-11 w-12 object-contain brightness-150 drop-shadow-[0_0_5px_rgba(255,220,150,0.45)]"
               />
             </span>
-            <span className="font-display text-base font-bold leading-tight tracking-normal sm:text-xl">
-              <span className="block sm:inline">JRCRMSTS</span>{" "}
-              <span className="text-primary">Enterprises</span>
+            <span className="flex flex-col font-display font-bold leading-tight tracking-normal">
+              <span className="text-base sm:text-xl">
+                <span className="text-xs font-medium sm:text-sm">M/s </span>
+                <span>JRCRMSTS</span> <span className="text-primary">Enterprises</span>
+              </span>
+              <span className="mt-0.5 text-[0.55rem] font-medium tracking-[0.04em] text-muted-foreground sm:text-[0.65rem]">
+                &amp; Project Management Consultant
+              </span>
             </span>
           </a>
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
@@ -104,6 +173,12 @@ function Index() {
             </a>
             <a href="#about" className="transition-colors hover:text-foreground">
               About Us
+            </a>
+            <a href="#gallery" className="transition-colors hover:text-foreground">
+              Gallery
+            </a>
+            <a href="#clients" className="transition-colors hover:text-foreground">
+              Clients
             </a>
           </nav>
           <a
@@ -140,8 +215,8 @@ function Index() {
             We design and build spaces that last.
           </h1>
           <p className="animate-fade-up-delay-2 mt-6 max-w-xl text-lg text-muted-foreground">
-            JRCRMSTS Enterprises &amp; Project Management Consultant — architectural and
-            construction services from Bahadurgarh &amp; Hisar, Haryana.
+            {firmName} — architectural and construction services from Bahadurgarh &amp; Hisar,
+            Haryana.
           </p>
           <div className="animate-fade-up-delay-2 mt-10 flex flex-wrap gap-4">
             <a
@@ -186,14 +261,12 @@ function Index() {
       <section id="about" className="border-y border-border bg-card">
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-2 md:py-32">
           <div>
-            <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">
-              About Us
-            </p>
+            <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">About Us</p>
             <h2 className="mt-4 font-display text-4xl font-semibold text-balance md:text-5xl">
               Technical excellence, honest hard work
             </h2>
             <p className="mt-6 leading-relaxed text-muted-foreground">
-              JRCRMSTS Enterprises is dedicated to providing the best architectural and related
+              M/s JRCRMSTS Enterprises is dedicated to providing the best architectural and related
               services, tailored to meet the needs of each client. It is our sincere belief that
               technical excellence and hard work form a solid foundation for a successful firm and
               long-lasting relationships.
@@ -205,12 +278,14 @@ function Index() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               {sectors.map((sector) => (
-                <span
-                  key={sector}
-                  className="rounded-full border border-border px-4 py-1.5 text-sm text-muted-foreground"
+                <a
+                  key={sector.slug}
+                  href={`#gallery-category-${sector.slug}`}
+                  onClick={() => setActiveGallery(sector.slug)}
+                  className="rounded-full border border-border px-4 py-1.5 text-sm text-muted-foreground transition-colors hover:border-primary/60 hover:text-primary"
                 >
-                  {sector}
-                </span>
+                  {sector.title}
+                </a>
               ))}
             </div>
           </div>
@@ -233,30 +308,155 @@ function Index() {
         </div>
       </section>
 
+      {/* Gallery */}
+      <section id="gallery" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+        <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">Gallery</p>
+        <h2 className="mt-4 max-w-2xl font-display text-4xl font-semibold text-balance md:text-5xl">
+          Explore our projects
+        </h2>
+        <div className="mt-8 flex justify-end gap-2 md:hidden">
+          <button
+            type="button"
+            onClick={() => scrollGallery(-1)}
+            aria-label="Show previous gallery categories"
+            className="grid h-10 w-10 place-items-center rounded-full border border-border text-primary transition-colors hover:bg-secondary"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollGallery(1)}
+            aria-label="Show next gallery categories"
+            className="grid h-10 w-10 place-items-center rounded-full border border-border text-primary transition-colors hover:bg-secondary"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+        <div
+          ref={galleryTrack}
+          className="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 md:grid md:grid-cols-5 md:overflow-visible"
+        >
+          {galleryCategories.map((category) => (
+            <button
+              id={`gallery-category-${category.slug}`}
+              key={category.slug}
+              type="button"
+              onClick={() =>
+                setActiveGallery((current) => (current === category.slug ? null : category.slug))
+              }
+              aria-expanded={activeGallery === category.slug}
+              className={`group flex w-[78%] shrink-0 snap-center flex-col items-start justify-between rounded-md border p-5 text-left transition-all sm:w-[45%] md:w-auto ${
+                activeGallery === category.slug
+                  ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(219,169,83,0.12)]"
+                  : "border-border bg-card hover:border-primary/50 hover:bg-secondary"
+              }`}
+            >
+              <category.icon className="h-8 w-8 text-primary" strokeWidth={1.5} />
+              <span className="mt-8 font-display text-lg font-semibold">{category.title}</span>
+              <span className="mt-2 text-xs text-muted-foreground">
+                {activeGallery === category.slug ? "Viewing projects" : "View projects"}
+              </span>
+            </button>
+          ))}
+        </div>
+        {activeGallery && (
+          <div
+            id="gallery-projects"
+            className="mt-8 rounded-md border border-primary/20 bg-gradient-to-br from-primary/5 via-card to-violet-950/10 p-6 sm:p-8"
+          >
+            <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">
+              {galleryCategories.find((category) => category.slug === activeGallery)?.title}
+            </p>
+            <h3 className="mt-3 font-display text-2xl font-semibold">Project photos coming soon</h3>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+              Photos for this project category will appear here. The gallery is ready for your
+              images.
+            </p>
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              {["Project overview", "Design details", "Completed work"].map((label) => (
+                <div
+                  key={label}
+                  className="grid aspect-[4/3] place-items-center rounded-md border border-border/80 bg-background/50 p-4 text-center"
+                >
+                  <div>
+                    <DraftingCompass
+                      className="mx-auto h-8 w-8 text-primary/70"
+                      strokeWidth={1.5}
+                    />
+                    <p className="mt-3 text-sm font-medium text-muted-foreground">{label}</p>
+                    <p className="mt-1 text-xs text-muted-foreground/70">Image will be added</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* Clients */}
+      <section id="clients" className="border-y border-border bg-card">
+        <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
+          <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">Our Clients</p>
+          <h2 className="mt-4 max-w-2xl font-display text-4xl font-semibold text-balance md:text-5xl">
+            Clients we have worked with and continue to work alongside
+          </h2>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {clients.map((client) => (
+              <div
+                key={client}
+                className="flex min-h-16 items-center rounded-md border border-border bg-background/70 px-4 py-3 transition-colors hover:border-primary/50 hover:bg-secondary sm:px-5"
+              >
+                <Building2 className="mr-3 h-4 w-4 shrink-0 text-primary" strokeWidth={1.5} />
+                <p className="font-display text-sm font-semibold sm:text-base">{client}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Contact */}
       <section id="contact" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
         <h2 className="mt-4 max-w-2xl font-display text-4xl font-semibold text-balance md:text-5xl">
           Let's talk about your project
         </h2>
         <div className="mt-14 grid gap-6 md:grid-cols-2">
-          <div className="rounded-md border border-border bg-card p-8">
-            <MapPin className="h-6 w-6 text-primary" strokeWidth={1.5} />
-            <h3 className="mt-4 font-display text-lg font-semibold">Branch Office — Bahadurgarh</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              23A, Sector-7 Market, Bahadurgarh,
-              <br />
-              Distt. Jhajjar, Haryana — 124507
-            </p>
-          </div>
-          <div className="rounded-md border border-border bg-card p-8">
-            <MapPin className="h-6 w-6 text-primary" strokeWidth={1.5} />
-            <h3 className="mt-4 font-display text-lg font-semibold">Head Office — Hisar</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              97A, Block-J, Model Town Extension,
-              <br />
-              Hisar, Haryana — 125005, India
-            </p>
-          </div>
+          {offices.map((office) => {
+            const mapQuery = encodeURIComponent(office.address.join(" "));
+
+            return (
+              <div key={office.title} className="h-64 rounded-md border border-border bg-card p-8">
+                <MapPin className="h-6 w-6 text-primary" strokeWidth={1.5} />
+                <h3 className="mt-4 font-display text-lg font-semibold">{office.title}</h3>
+                <div className="mt-2 flex items-center justify-between gap-4">
+                  <p className="min-w-0 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {office.address.map((line, index) => (
+                      <span key={line}>
+                        {index > 0 && <br />}
+                        {line}
+                      </span>
+                    ))}
+                  </p>
+                  <div className="w-28 shrink-0 overflow-hidden rounded-md border border-primary/20 bg-gradient-to-br from-primary/10 via-secondary to-violet-950/10 p-1 shadow-sm sm:w-32">
+                    <iframe
+                      title={`Map showing ${office.title}`}
+                      src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
+                      className="h-20 w-full rounded-sm"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block px-1 py-1.5 text-center text-[10px] font-medium leading-tight text-primary transition-colors hover:text-foreground"
+                    >
+                      Open map
+                    </a>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
           <a
             href="tel:+919416779890"
             className="rounded-md border border-border bg-card p-8 transition-colors hover:bg-secondary"
@@ -282,9 +482,13 @@ function Index() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground md:flex-row">
           <p className="font-display font-semibold text-foreground">
+            <span className="text-xs font-medium">M/s </span>
             JRCRMSTS <span className="text-primary">Enterprises</span>
+            <span className="mt-1 block text-xs font-normal text-muted-foreground">
+              &amp; Project Management Consultant
+            </span>
           </p>
-          <p>Architecture &amp; Project Management Consultant — Bahadurgarh &amp; Hisar, Haryana</p>
+          <p>Architecture — Bahadurgarh &amp; Hisar, Haryana</p>
         </div>
       </footer>
     </div>

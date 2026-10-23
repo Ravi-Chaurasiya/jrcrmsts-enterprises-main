@@ -1,3 +1,3 @@
-# JRCRMSTS Enterprises
+# JRCRMSTS Enterprises Website
 
-Source code and development instructions for the company website are in [`jrcrmsts-portal-main`](./jrcrmsts-portal-main/README.md).
+Source code and setup instructions for the official company website are in [`jrcrmsts-portal-main`](./jrcrmsts-portal-main/README.md).
