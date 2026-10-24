@@ -14,6 +14,8 @@ import {
   Mail,
   MapPin,
   ArrowRight,
+  ShieldCheck,
+  UsersRound,
 } from "lucide-react";
 import { useRef, useState } from "react";
 import heroPoster from "@/assets/hero.jpg";
@@ -194,6 +196,29 @@ const clients = [
   "Bhiwani Medical College",
   "Malbue Towne Farm House",
   "XLRI Delhi NCR Campus",
+];
+
+const clientHighlights = [
+  {
+    icon: Building2,
+    value: "2,300+ SQFT",
+    label: "AREA BUILT",
+  },
+  {
+    icon: HardHat,
+    value: "50,200+ SQFT",
+    label: "UNDER CONSTRUCTION",
+  },
+  {
+    icon: ShieldCheck,
+    value: "120+",
+    label: "CLIENTS",
+  },
+  {
+    icon: UsersRound,
+    value: "50+",
+    label: "ENGINEERS AND STAFF",
+  },
 ];
 
 const offices = [
@@ -548,26 +573,33 @@ function Index() {
       </section>
 
       {/* Clients */}
-      <section id="clients" className="border-y border-border bg-card">
-        <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
-          <p className="text-sm font-medium uppercase tracking-[0.3em] text-primary">Our Clients</p>
-          <h2 className="mt-4 max-w-2xl font-display text-4xl font-semibold text-balance md:text-5xl">
-            Clients we have worked with and continue to work alongside
-          </h2>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {clients.map((client) => (
+      <section id="clients" className="border-y border-border bg-[#0a0a0b]">
+        <div className="mx-auto max-w-[1500px] px-4 py-10 sm:px-6 lg:px-8">
+          <p className="text-center font-display text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
+            satisfaction.
+          </p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+            {clientHighlights.map((stat) => (
               <div
-                key={client}
-                className="flex min-h-16 items-center rounded-md border border-border bg-background/70 px-4 py-3 transition-colors hover:border-primary/50 hover:bg-secondary sm:px-5"
+                key={stat.label}
+                className="relative flex min-h-[120px] flex-col justify-center overflow-hidden rounded-2xl border border-primary/40 bg-[radial-gradient(circle_at_top_left,_rgba(219,169,83,0.14),_transparent_35%),linear-gradient(180deg,_rgba(10,10,12,0.98)_0%,_rgba(16,16,18,0.96)_100%)] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:p-4"
               >
-                <Building2 className="mr-3 h-4 w-4 shrink-0 text-primary" strokeWidth={1.5} />
-                <p className="font-display text-sm font-semibold sm:text-base">{client}</p>
+                <div className="mb-2 flex justify-center">
+                  <div className="grid h-9 w-9 place-items-center rounded-full border border-primary/60 bg-primary/5 text-primary shadow-[0_0_22px_rgba(219,169,83,0.18)]">
+                    <stat.icon className="h-5 w-5" strokeWidth={1.7} />
+                  </div>
+                </div>
+                <div className="text-center">
+                  <p className="font-display text-xl font-semibold tracking-[-0.05em] text-primary sm:text-2xl">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.12em] text-muted-foreground sm:text-[0.65rem]">
+                    {stat.label}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
-          <p className="mt-6 text-center font-display text-sm text-muted-foreground sm:text-base">
-            And many more organizations have trusted us with their projects.
-          </p>
         </div>
       </section>
 
